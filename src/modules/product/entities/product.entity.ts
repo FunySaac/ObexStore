@@ -1,8 +1,9 @@
 import { Category } from "src/modules/category/entities/category.entity";
 import { Column, JoinColumn, ManyToOne, OneToMany } from "typeorm";
-import { ProductEstatus } from "./product-status.entity";
+import { ProductStatus } from "./product-status.entity";
+import { CommonEntity } from "src/common/common.entity";
 
-export class Product {
+export class Product extends CommonEntity {
     @Column()
     name: string;
   
@@ -12,9 +13,9 @@ export class Product {
     @Column()
     price: number;
   
-    @ManyToOne(() => ProductEstatus, (productstatus) => productstatus.productStatusId)
+    @ManyToOne(() => ProductStatus, (productstatus) => productstatus.productStatusId)
     @JoinColumn({ referencedColumnName: 'id', name: 'productStatus' })
-    productstatus: ProductEstatus;
+    productstatus: ProductStatus;
   
     @OneToMany(() => Category, (category) => category.product)
     @JoinColumn({ referencedColumnName: 'id' , name: 'product' })

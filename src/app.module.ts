@@ -3,12 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './modules/user/user.module';
-import { ShoppingcartModule } from './modules/shoppingcart/shoppingcart.module';
 import { ProductModule } from './modules/product/product.module';
 import { PaymentmethodModule } from './modules/paymentmethod/paymentmethod.module';
 import { OrderModule } from './modules/order/order.module';
 import { CategoryModule } from './modules/category/category.module';
-import { CartitemModule } from './modules/cartitem/cartitem.module';
 
 @Module({
   imports: [
@@ -22,12 +20,10 @@ import { CartitemModule } from './modules/cartitem/cartitem.module';
       autoLoadEntities: true,
     }),
     UserModule,
-    ShoppingcartModule,
     ProductModule,
     PaymentmethodModule,
     OrderModule,
-    CategoryModule,
-    CartitemModule
+    CategoryModule
   ],
   controllers: [AppController],
   providers: [AppService]

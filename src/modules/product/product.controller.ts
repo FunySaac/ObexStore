@@ -7,12 +7,12 @@ import { UpdateProductDto } from './dto/update-product.dto';
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
-  @Post()
+  @Post('create')
   create(@Body() createProductDto: CreateProductDto) {
     return this.productService.create(createProductDto);
   }
 
-  @Get()
+  @Get('getAll')
   findAll() {
     return this.productService.findAll();
   }
@@ -30,5 +30,10 @@ export class ProductController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.productService.remove(+id);
+  }
+
+  @Get('status')
+  getStatus() {
+    return this.productService.getProductStatus();
   }
 }
