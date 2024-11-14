@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Product } from './entities/product.entity';
-import { Repository } from 'typeorm';
 import { ProductStatus } from './entities/product-status.entity';
+import { Product } from './entities/product.entity';
 
 @Injectable()
 export class ProductService {
@@ -39,6 +39,13 @@ export class ProductService {
   }
 
   async remove(id: number) {
-    return `This action removes a #${id} product`;
+    const response = await this.productRepository.delete(id)
+    return response.affected > 0;
+  }
+
+  getProductStatus() {
+    return this.productStatusRepository.find ({
+      relations: ['product']
+    })
   }
 }
