@@ -34,10 +34,10 @@ export class ProductService {
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
-    const response = await this.productRepository.update(id , updateProductDto)
-    return response.affected > 0;
+    const responseUpdateProduct = await this.productRepository.update(id , updateProductDto)
+    return responseUpdateProduct.affected > 0;
   }
-
+  
   async remove(id: number) {
     const response = await this.productRepository.delete(id)
     return response.affected > 0;

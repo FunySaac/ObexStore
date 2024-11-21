@@ -27,10 +27,9 @@ export class User extends CommonEntity {
     phone: Number
 
     @ManyToOne(() => UserType, (usertype) => usertype.users)
-    @JoinColumn({ referencedColumnName: 'id', name: 'usertype' })
-    usertype: UserType;
+    @JoinColumn({ referencedColumnName: 'id', name: 'userType' })
+    userType: UserType;
 
     @OneToMany(() => Order, (order) => order.user)
-    @JoinColumn({ referencedColumnName: 'id' , name: 'user' })
     userId: User[]
 }

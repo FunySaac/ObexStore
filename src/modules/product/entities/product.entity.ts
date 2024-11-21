@@ -8,7 +8,7 @@ export class Product extends CommonEntity {
     name: string;
   
     @Column()
-    description: Text;
+    description: string;
   
     @Column()
     price: number;

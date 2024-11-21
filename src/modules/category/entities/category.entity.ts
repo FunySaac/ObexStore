@@ -7,7 +7,7 @@ export class Category extends CommonEntity {
     name: string;
 
     @Column()
-    description: Text;
+    description: string;
 
     @ManyToOne(() => Product, (pruduct) => pruduct.categoryId)
     @JoinColumn({ referencedColumnName: 'id' , name: 'product' })
