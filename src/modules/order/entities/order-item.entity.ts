@@ -1,6 +1,7 @@
 import { CommonEntity } from "src/common/common.entity";
-import { Column } from "typeorm";
+import { Column, Entity } from "typeorm";
 
+@Entity()
 export class OrderItem extends CommonEntity {
     @Column()
     orderId: string;

@@ -1,8 +1,9 @@
 import { CommonEntity } from "src/common/common.entity";
 import { Order } from "src/modules/order/entities/order.entity";
-import { Column, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { UserType } from "./user-type.entity";
 
+@Entity()
 export class User extends CommonEntity {
 
     @Column()
@@ -26,10 +27,16 @@ export class User extends CommonEntity {
     @Column()
     phone: Number
 
-    @ManyToOne(() => UserType, (usertype) => usertype.users)
-    @JoinColumn({ referencedColumnName: 'id', name: 'userType' })
+    @Column()
+    usertype: string
+
+    @ManyToOne(() => UserType, (userType) => userType.users)
+    @JoinColumn({ name: 'userTypeId' })
     userType: UserType;
 
+    @Column()
+    userTypeId: number;
+
     @OneToMany(() => Order, (order) => order.user)
-    userId: User[]
+    orders: Order[]
 }

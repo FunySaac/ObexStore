@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './modules/user/user.module';
-import { ProductModule } from './modules/product/product.module';
-import { PaymentmethodModule } from './modules/paymentmethod/paymentmethod.module';
-import { OrderModule } from './modules/order/order.module';
 import { CategoryModule } from './modules/category/category.module';
+import { OrderModule } from './modules/order/order.module';
+import { PaymentmethodModule } from './modules/paymentmethod/paymentmethod.module';
+import { ProductModule } from './modules/product/product.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -23,7 +23,7 @@ import { CategoryModule } from './modules/category/category.module';
     ProductModule,
     PaymentmethodModule,
     OrderModule,
-    CategoryModule
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService]

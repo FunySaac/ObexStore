@@ -1,7 +1,8 @@
 import { CommonEntity } from "src/common/common.entity";
 import { Order } from "src/modules/order/entities/order.entity";
-import { Column, JoinColumn, ManyToOne } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 
+@Entity()
 export class Paymentmethod extends CommonEntity {
     @Column()
     name: string;

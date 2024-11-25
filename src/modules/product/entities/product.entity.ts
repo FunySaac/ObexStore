@@ -1,8 +1,9 @@
 import { CommonEntity } from "src/common/common.entity";
 import { Category } from "src/modules/category/entities/category.entity";
-import { Column, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { ProductStatus } from "./product-status.entity";
 
+@Entity()
 export class Product extends CommonEntity {
     @Column()
     name: string;
