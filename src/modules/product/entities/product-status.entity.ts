@@ -8,6 +8,6 @@ export class ProductStatus extends CommonEntity {
     name: string;
 
     @OneToMany(() => Product, (product) => product.productstatus)
-    @JoinColumn({ referencedColumnName: 'id', name: 'productStatus' })
+    @JoinColumn({ referencedColumnName: 'id', name: 'productStatusId' })
     productStatusId: ProductStatus[];
 }

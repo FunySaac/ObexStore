@@ -15,7 +15,7 @@ export class Product extends CommonEntity {
     price: number;
   
     @ManyToOne(() => ProductStatus, (productstatus) => productstatus.productStatusId)
-    @JoinColumn({ referencedColumnName: 'id', name: 'productStatus' })
+    @JoinColumn({ referencedColumnName: 'id', name: 'productStatusId' })
     productstatus: ProductStatus;
   
     @OneToMany(() => Category, (category) => category.product)

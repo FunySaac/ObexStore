@@ -27,10 +27,7 @@ export class User extends CommonEntity {
     @Column()
     phone: Number
 
-    @Column()
-    usertype: string
-
-    @ManyToOne(() => UserType, (userType) => userType.users)
+    @ManyToOne(() => UserType, (usertype) => usertype.users)
     @JoinColumn({ name: 'userTypeId' })
     userType: UserType;
 

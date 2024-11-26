@@ -5,8 +5,8 @@ export class CommonEntity {
     id: number
 
     @CreateDateColumn()
-    createdday: Date
+    createdDay: Date
 
     @UpdateDateColumn()
-    updateddate:Date
+    updatedDay:Date
 }
