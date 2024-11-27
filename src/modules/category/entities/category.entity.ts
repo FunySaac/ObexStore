@@ -1,6 +1,6 @@
 import { CommonEntity } from "src/common/common.entity";
 import { Product } from "src/modules/product/entities/product.entity";
-import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import { Column, Entity, OneToMany } from "typeorm";
 
 @Entity()
 export class Category extends CommonEntity {
@@ -10,7 +10,6 @@ export class Category extends CommonEntity {
     @Column()
     description: string;
 
-    @ManyToOne(() => Product, (pruduct) => pruduct.categoryId)
-    @JoinColumn({ referencedColumnName: 'id' , name: 'product' })
-    product: Product;
+    @OneToMany(() => Product, (pruduct) => pruduct.category)
+    products: Product[];
 }

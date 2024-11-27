@@ -23,7 +23,9 @@ export class OrderService {
 
   findAll() {
     return this.orderRepository.find ({
-      relations: ['orderstate'],
+      relations: {
+        orderState: true,
+      },
     });
   }
 

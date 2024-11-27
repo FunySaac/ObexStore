@@ -12,7 +12,7 @@ export class CategoryService {
     @InjectRepository(Category)
     private categoryRepository: Repository<Category>
   ) {}
-  
+
   async create(createCategoryDto: CreateCategoryDto) {
     const category = await this.categoryRepository.save(createCategoryDto);
     return category.id;
@@ -20,7 +20,9 @@ export class CategoryService {
 
   findAll() {
     return this.categoryRepository.find ({
-      relations: ['products'],
+      relations: {
+        products: true
+      },
     });
   }
 

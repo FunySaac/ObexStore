@@ -20,7 +20,11 @@ export class PaymentmethodService {
 
   findAll() {
     return this.paymentmethodRepository.find ({
-      relations: ['paymentmethod']
+      relations: {
+        orders: {
+          orderState: true
+        }
+      }
     });
   }
 
