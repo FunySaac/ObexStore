@@ -15,7 +15,7 @@ export class User extends CommonEntity {
     @Column({ unique: true})
     email: string
 
-    @Column()
+    @Column({nullable: false})
     password: string
 
     @Column()
@@ -24,7 +24,7 @@ export class User extends CommonEntity {
     @Column({ nullable: true })
     birthday: Date | null
 
-    @Column()
+    @Column({nullable: false})
     phone: Number
 
     @ManyToOne(() => UserType, (usertype) => usertype.users)

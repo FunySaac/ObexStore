@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './modules/auth/auth.module';
 import { CategoryModule } from './modules/category/category.module';
 import { OrderModule } from './modules/order/order.module';
 import { PaymentmethodModule } from './modules/paymentmethod/paymentmethod.module';
@@ -15,7 +16,7 @@ import { UserModule } from './modules/user/user.module';
       host: 'localhost',
       port: 3306,
       username:'root',
-      password:  '123',
+      password:  '',
       database: 'datastore',
       autoLoadEntities: true,
     }),
@@ -24,6 +25,7 @@ import { UserModule } from './modules/user/user.module';
     PaymentmethodModule,
     OrderModule,
     CategoryModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService]
