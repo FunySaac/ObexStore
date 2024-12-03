@@ -17,23 +17,26 @@ export class UserService {
   ) {} 
 
   async create(createUserDto: CreateUserDto) {
-    const user = await this.userRepository.save(createUserDto);
-    return user.id;
+    return this.userRepository.save(createUserDto);
   }
 
-  findAll() {
-    return this.userRepository.find({
-      relations: {
-        userType: true
-      },
-    });
+  findOneByEmail(email: string) {
+    return this.userRepository.findOneBy({email})
   }
 
-  findOne(id: number) {
-    return this.userRepository.find ({
-      where: {id}
-    });
-  }
+  //findAll() {
+  //  return this.userRepository.find({
+  //    relations: {
+  //      userType: true
+  //    },
+  //  });
+  //}
+
+  //findOne(id: number) {
+  //  return this.userRepository.find ({
+  //    where: {id}
+  //  });
+  //}
 
   async update(id: number, updateUserDto: UpdateUserDto) {
     const response = await this.userRepository.update(id , updateUserDto)

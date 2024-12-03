@@ -6,10 +6,12 @@ currentDate.setFullYear(new Date().getFullYear() - 18)
 
 export class RegisterDto {
     
+    @Transform(({value}) => value.trim())
     @IsString()
     @MinLength(3)
     name: string;
 
+    @Transform(({value}) => value.trim())
     @IsString()
     @MinLength(3)
     lastName: string;
@@ -22,6 +24,7 @@ export class RegisterDto {
     @MaxDate( currentDate )
     birthday: Date
 
+    @Transform(({value}) => value.trim())
     @IsString()
     phone: Number
 
@@ -32,5 +35,5 @@ export class RegisterDto {
     @IsString()
     @MinLength(8)
     password: string;
-
+    
 }
