@@ -26,7 +26,7 @@ export class RegisterDto {
 
     @Transform(({value}) => value.trim())
     @IsString()
-    phone: Number
+    phone: string
 
     @IsEmail()
     email: string;

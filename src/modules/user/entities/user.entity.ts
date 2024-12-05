@@ -19,19 +19,19 @@ export class User extends CommonEntity {
     password: string
 
     @Column()
-    address: string 
+    postalCode: string 
 
     @Column({ nullable: true })
     birthday: Date | null
 
     @Column({nullable: false})
-    phone: Number
+    phone: string
 
     @ManyToOne(() => UserType, (usertype) => usertype.users)
     @JoinColumn({ name: 'userTypeId' })
     userType: UserType;
 
-    @Column()
+    @Column({default: 2})
     userTypeId: number;
 
     @OneToMany(() => Order, (order) => order.user)
