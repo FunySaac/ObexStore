@@ -6,22 +6,32 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { UserType } from './entities/user-type.entity';
 import { User } from './entities/user.entity';
 
+/**
+ *
+ */
 @Injectable()
 export class UserService {
-
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
     @InjectRepository(UserType)
-    private userTypeRepository: Repository<UserType>,
-  ) {} 
+    private userTypeRepository: Repository<UserType>
+  ) {}
 
+  /**
+   *
+   * @param createUserDto
+   */
   async create(createUserDto: CreateUserDto) {
     return this.userRepository.save(createUserDto);
   }
 
+  /**
+   *
+   * @param email
+   */
   findOneByEmail(email: string) {
-    return this.userRepository.findOneBy({email})
+    return this.userRepository.findOneBy({ email });
   }
 
   //findAll() {
@@ -38,19 +48,31 @@ export class UserService {
   //  });
   //}
 
+  /**
+   *
+   * @param id
+   * @param updateUserDto
+   */
   async update(id: number, updateUserDto: UpdateUserDto) {
-    const response = await this.userRepository.update(id , updateUserDto)
+    const response = await this.userRepository.update(id, updateUserDto);
     return response.affected > 0;
   }
 
+  /**
+   *
+   * @param id
+   */
   async remove(id: number) {
-    const response = await this.userRepository.delete(id)
+    const response = await this.userRepository.delete(id);
     return response.affected > 0;
   }
 
-  getUserTypes () {
+  /**
+   *
+   */
+  getUserTypes() {
     return this.userTypeRepository.find({
       relations: ['user']
-    })
+    });
   }
 }

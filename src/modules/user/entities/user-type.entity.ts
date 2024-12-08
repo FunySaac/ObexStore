@@ -1,12 +1,15 @@
-import { CommonEntity } from "src/common/common.entity";
-import { Column, Entity, OneToMany } from "typeorm";
-import { User } from "./user.entity";
+import { CommonEntity } from 'src/common/common.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
+import { User } from './user.entity';
 
+/**
+ *
+ */
 @Entity()
 export class UserType extends CommonEntity {
-    @Column()
-    name: string
+  @Column()
+  name: string;
 
-    @OneToMany(() => User, (user) => user.userType)
-    users: User[];
+  @OneToMany(() => User, (user) => user.userType)
+  users: User[];
 }

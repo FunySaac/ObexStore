@@ -1,12 +1,19 @@
-import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm';
 
+/**
+ *
+ */
 export class CommonEntity {
-    @PrimaryGeneratedColumn()
-    id: number
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @CreateDateColumn()
-    createdDay: Date
+  @CreateDateColumn()
+  createdDay: Date;
 
-    @UpdateDateColumn()
-    updatedDay:Date
+  @UpdateDateColumn()
+  updatedDay: Date;
 }

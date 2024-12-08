@@ -1,9 +1,12 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
+import { AppModule } from './app.module';
 
-async function bootstrap() {
+/**
+ *
+ */
+const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
 
   app.useGlobalPipes(
@@ -11,11 +14,11 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true
-    }),
+    })
   );
 
   app.use(cookieParser());
 
   await app.listen(3000);
-}
-bootstrap( );
+};
+bootstrap();

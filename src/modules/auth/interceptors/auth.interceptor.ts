@@ -2,15 +2,25 @@ import {
   CallHandler,
   ExecutionContext,
   Injectable,
-  NestInterceptor,
+  NestInterceptor
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { User } from 'src/modules/user/entities/user.entity';
+import { LoginDto } from '../dto/login.dto';
 
+/**
+ *
+ */
 @Injectable()
 export class AuthInterceptor implements NestInterceptor {
+  /**
+   *
+   * @param context
+   * @param next
+   */
   intercept(
     context: ExecutionContext,
-    next: CallHandler<LoginResponseDto>,
+    next: CallHandler<LoginDto>
   ): Observable<User> {
     return next.handle().pipe(
       map(({ user, token, refresh }) => {
@@ -20,7 +30,7 @@ export class AuthInterceptor implements NestInterceptor {
           response.cookie('refresh', refresh, { httpOnly: true });
         }
         return user;
-      }),
+      })
     );
   }
 }

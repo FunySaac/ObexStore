@@ -1,12 +1,15 @@
-import { Transform } from "class-transformer";
-import { IsEmail, IsString, MinLength } from "class-validator";
+import { IsString } from 'class-validator';
+import { User } from 'src/modules/user/entities/user.entity';
 
+/**
+ *
+ */
 export class LoginDto {
-    @IsEmail()
-    email: string;
+  user: User;
 
-    @Transform(({value}) => value.trim())
-    @IsString()
-    @MinLength(8)
-    password: string;
+  @IsString()
+  token: string;
+
+  @IsString()
+  refresh: string;
 }

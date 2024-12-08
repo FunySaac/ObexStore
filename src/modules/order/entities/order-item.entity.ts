@@ -1,20 +1,23 @@
-import { CommonEntity } from "src/common/common.entity";
-import { Column, Entity } from "typeorm";
+import { CommonEntity } from 'src/common/common.entity';
+import { Column, Entity } from 'typeorm';
 
+/**
+ *
+ */
 @Entity()
 export class OrderItem extends CommonEntity {
-    @Column()
-    orderId: string;
+  @Column()
+  orderId: string;
 
-    @Column()
-    productId: string;
+  @Column()
+  productId: string;
 
-    @Column()
-    productQuantity: number;
+  @Column()
+  productQuantity: number;
 
-    @Column()
-    unitPrice: number;
+  @Column()
+  unitPrice: number;
 
-    @Column()
-    productTotalPrice: number;
+  @Column()
+  productTotalPrice: number;
 }

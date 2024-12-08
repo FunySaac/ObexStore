@@ -1,33 +1,53 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Req,
+  UnauthorizedException,
+  UseGuards,
+  UseInterceptors
+} from '@nestjs/common';
+import { Request } from 'express';
 import { AuthService } from './auth.service';
-import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
-import { readFile } from 'fs/promises';
-import { AuthGuard } from './guards/auth.guard';
+import { RegisterDto } from './dto/register.dto';
+import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
+/**
+ *
+ */
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  /**
+   *
+   * @param registerDto
+   */
   @Post('register')
   register(
     @Body()
-    registerDto:RegisterDto
+    registerDto: RegisterDto
   ) {
-    return this.authService.register(registerDto)
+    return this.authService.register(registerDto);
   }
 
-  @Post('login')
-  login(
-    @Body()
-    loginDto: LoginDto
-  ) {
-    return this.authService.login(loginDto)
-  }
-
-  @Get('profile')
-  @UseGuards(AuthGuard)
-  profile() {
-    return 'profile'
+  /**
+   *
+   * @param req
+   */
+  @Post('refresh-token')
+  @UseGuards(JwtRefreshGuard)
+  @UseInterceptors(AuthInterceptor)
+  refreshTokens(@Req() req: Request): Promise<Omit<LoginDto, 'user'>> {
+    if (!req.user) {
+      throw new UnauthorizedException();
+    }
+    return this.authService.generateTokenPair(
+      req.user['info'],
+      req.cookies['refresh'],
+      req.user['expiration']
+    );
   }
 }

@@ -1,4 +1,10 @@
-import { OmitType } from "@nestjs/mapped-types";
-import { Paymentmethod } from "../entities/paymentmethod.entity";
+import { OmitType } from '@nestjs/mapped-types';
+import { Paymentmethod } from '../entities/paymentmethod.entity';
 
-export class CreatePaymentmethodDto extends OmitType(Paymentmethod, ['createdDay' , 'updatedDay']) {}
+/**
+ *
+ */
+export class CreatePaymentmethodDto extends OmitType(Paymentmethod, [
+  'createdDay',
+  'updatedDay'
+]) {}
