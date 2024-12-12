@@ -1,5 +1,6 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Post,
   Req,
@@ -8,10 +9,12 @@ import {
   UseInterceptors
 } from '@nestjs/common';
 import { Request } from 'express';
+import { User } from '../user/entities/user.entity';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
+import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 /**
@@ -36,6 +39,19 @@ export class AuthController {
   /**
    *
    * @param req
+   * @param request
+   */
+  @Post('login')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @UseInterceptors(AuthInterceptor)
+  @UseGuards(LocalAuthGuard)
+  login(@Req() request: Request) {
+    return this.authService.login(request.user as User);
+  }
+
+  /**
+   *
+   * @param req
    */
   @Post('refresh-token')
   @UseGuards(JwtRefreshGuard)
@@ -49,5 +65,17 @@ export class AuthController {
       req.cookies['refresh'],
       req.user['expiration']
     );
+  }
+
+  /**
+   *
+   * @param request
+   * @param req
+   */
+  @Post('logout')
+  logout(@Req() req: Request) {
+    req.res.clearCookie('token');
+    req.res.clearCookie('refresh');
+    return;
   }
 }

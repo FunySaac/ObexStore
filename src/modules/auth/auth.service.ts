@@ -42,6 +42,7 @@ export class AuthService {
    * @param root0.birthday
    * @param root0.email
    * @param root0.password
+   * @param root0.token
    */
   async register({
     name,
@@ -79,7 +80,7 @@ export class AuthService {
    *
    * @param user
    */
-  async login(user: User): Promise<LoginDto> {
+  async login(user: User) {
     const token = await this.generateTokenPair({
       id: user.id,
       email: user.email
@@ -87,6 +88,18 @@ export class AuthService {
     return { user, ...token };
   }
 
+  /**
+   *
+   * @param email
+   * @param password
+   */
+  async validateUser(email: string, password: string) {
+    const userVerify = await this.userService.findOneByEmail(email);
+    if (userVerify && (await bcrypt.compare(password, userVerify.password))) {
+      return userVerify;
+    }
+    return null;
+  }
   /**
    *
    * @param userInfo
